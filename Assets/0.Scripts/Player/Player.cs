@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
+    // y속도에 중력 적용
+    public ForceReceiver ForceReceiver { get; private set; }
+
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
         Animator = GetComponentInChildren<Animator>();
         Input = GetComponent<PlayerController>();
         Controller = GetComponent<CharacterController>();
+        ForceReceiver = GetComponent<ForceReceiver>();
 
         stateMachine = new PlayerStateMachine(this);
 

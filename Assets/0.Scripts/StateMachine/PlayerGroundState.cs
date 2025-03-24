@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 땅에 붙어있을 때 점프할 수 있다
+/// </summary>
 public class PlayerGroundState : PlayerBaseState
 {
     public PlayerGroundState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
@@ -35,6 +38,16 @@ public class PlayerGroundState : PlayerBaseState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+
+        /// stateMachine.Player.Controller.velocity.y < Physics.gravity.y * Time.fixedDeltaTime: 평소의 y보다 내려가고 있다
+        /// FixedUpdate에서는 Time.fixedDeltaTime을 사용해야 한다
+        if (!stateMachine.Player.Controller.isGrounded
+      && stateMachine.Player.Controller.velocity.y < Physics.gravity.y * Time.fixedDeltaTime)
+        {
+            stateMachine.ChangeState(stateMachine.FallState);
+            return;
+        }
     }
 
     // Ground에서 Movement 상태에서 끝
@@ -51,5 +64,14 @@ public class PlayerGroundState : PlayerBaseState
         stateMachine.ChangeState(stateMachine.IdleState);
         /// 저장된 이벤트를 호출한다
         base.OnMovementCanceled(context);
+    }
+
+    protected override void OnJumpStarted(InputAction.CallbackContext context)
+    {
+        base.OnJumpStarted(context);
+
+        // 여기서는 State만 바꾼다
+        // ForceReceiver에 접근해서 호출하는 Jump함수는 ForceReceiver에 구현한다
+        stateMachine.ChangeState(stateMachine.JumpState);   
     }
 }

@@ -33,6 +33,8 @@ public class PlayerBaseState : IState
 
         /// 달리기 시작했을 때 이벤트 등록
         input.playerActions.Run.started += OnRunStarted;
+
+        input.playerActions.Jump.started += OnJumpStarted;
     }
 
     protected virtual void RemoveInputActionsCallbacks()
@@ -40,8 +42,9 @@ public class PlayerBaseState : IState
         PlayerController input = stateMachine.Player.Input;
         /// 나갈때는 이벤트를 모두 해제
         input.playerActions.Movement.canceled -= OnMovementCanceled;
-        input.playerActions.Run.started -= OnRunStarted;
+        input.playerActions.Jump.canceled -= OnJumpStarted;
 
+        input.playerActions.Run.started -= OnRunStarted;
     }
 
     public virtual void HandleInput()
@@ -67,6 +70,11 @@ public class PlayerBaseState : IState
     }
     // Run.started 이벤트에 등록할 함수
     protected virtual void OnRunStarted(InputAction.CallbackContext context)
+    {
+
+    }
+    // Jump
+    protected virtual void OnJumpStarted(InputAction.CallbackContext context)
     {
 
     }
@@ -134,7 +142,8 @@ public class PlayerBaseState : IState
     {
         float movementSpeed = GetMovementSpeed();
 
-        stateMachine.Player.Controller.Move((direction * movementSpeed) * Time.deltaTime);
+        // y방향(중력)을 추가한다
+        stateMachine.Player.Controller.Move(((direction * movementSpeed) + stateMachine.Player.ForceReceiver.Movement) * Time.deltaTime);
     }
 
     private float GetMovementSpeed()
