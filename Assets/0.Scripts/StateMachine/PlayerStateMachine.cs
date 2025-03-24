@@ -13,6 +13,10 @@ public class PlayerStateMachine : StateMachine
 
     public float JumpForce { get; set; }
 
+    public bool IsAttacking { get; set; }
+    public int ComboIndex { get; set; }
+
+
     public Transform MainCameraTransform { get; set; }  // Rotation할 때 카메라도 같이 회전해야한다
 
     // 수정사항
@@ -21,6 +25,9 @@ public class PlayerStateMachine : StateMachine
     public PlayerRunState RunState { get; private set; }
     public PlayerJumpState JumpState { get; }
     public PlayerFallState FallState { get; }
+
+    public PlayerComboAttackState ComboAttackState { get; }
+
 
     public PlayerStateMachine(Player player)
     {
@@ -38,5 +45,7 @@ public class PlayerStateMachine : StateMachine
 
         MovementSpeed = player.Data.GroundData.BaseSpeed;
         RotationDamping = player.Data.GroundData.BaseRotationDamping;
+
+        ComboAttackState = new PlayerComboAttackState(this);
     }
 }

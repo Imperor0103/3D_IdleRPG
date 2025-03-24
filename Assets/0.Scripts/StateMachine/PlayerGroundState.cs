@@ -30,9 +30,20 @@ public class PlayerGroundState : PlayerBaseState
         StopAnimation(stateMachine.Player.AnimationData.GroundParameterHash);
     }
 
+    /// <summary>
+    /// 맨 처음 ComboAttackState로 들어와 주는 것을 세팅
+    /// </summary>
     public override void Update()
     {
         base.Update();
+        
+        
+        if (stateMachine.IsAttacking)
+        {
+            // ComboAttackState에 최초 진입
+            OnAttack();
+            return;
+        }
     }
 
     public override void PhysicsUpdate()
@@ -74,4 +85,11 @@ public class PlayerGroundState : PlayerBaseState
         // ForceReceiver에 접근해서 호출하는 Jump함수는 ForceReceiver에 구현한다
         stateMachine.ChangeState(stateMachine.JumpState);   
     }
+
+    // 공격시 
+    protected virtual void OnAttack()
+    {
+        stateMachine.ChangeState(stateMachine.ComboAttackState);
+    }
+
 }

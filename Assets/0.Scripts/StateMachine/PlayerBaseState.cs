@@ -35,6 +35,9 @@ public class PlayerBaseState : IState
         input.playerActions.Run.started += OnRunStarted;
 
         input.playerActions.Jump.started += OnJumpStarted;
+
+        input.playerActions.Attack.performed += OnAttackPerformed;
+        input.playerActions.Attack.canceled += OnAttackCanceled;
     }
 
     protected virtual void RemoveInputActionsCallbacks()
@@ -45,6 +48,9 @@ public class PlayerBaseState : IState
         input.playerActions.Jump.canceled -= OnJumpStarted;
 
         input.playerActions.Run.started -= OnRunStarted;
+
+        input.playerActions.Attack.performed -= OnAttackPerformed;
+        input.playerActions.Attack.canceled -= OnAttackCanceled;
     }
 
     public virtual void HandleInput()
@@ -142,7 +148,9 @@ public class PlayerBaseState : IState
     {
         float movementSpeed = GetMovementSpeed();
 
-        // y방향(중력)을 추가한다
+        // Jump를 호출했다면 수직이동(y방향)이고
+        // AddForce를 호출했다면 수평방향
+        // 둘 다 아닌 경우에는 수평이동, 수직이동 모두 없다
         stateMachine.Player.Controller.Move(((direction * movementSpeed) + stateMachine.Player.ForceReceiver.Movement) * Time.deltaTime);
     }
 
@@ -163,4 +171,50 @@ public class PlayerBaseState : IState
             playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
         }
     }
+
+    // 수평이동
+    protected void ForceMove()
+    {
+        stateMachine.Player.Controller.Move(stateMachine.Player.ForceReceiver.Movement * Time.deltaTime);
+    }
+
+    // 공격 시작할때 등록할 함수
+    protected virtual void OnAttackPerformed(InputAction.CallbackContext obj)
+    {
+        stateMachine.IsAttacking = true;
+    }
+    // 공격이 끝날때 등록할 함수
+    protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
+    {
+        stateMachine.IsAttacking = false;
+    }
+
+    /// <summary>
+    /// 애니메이션의 진행도를 받아오는 메서드
+    /// </summary>
+    /// <param name="animator"></param>
+    /// <param name="tag"></param>
+    /// <returns></returns>
+    protected float GetNormalizedTime(Animator animator, string tag)
+    {
+        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
+
+        /// 전환되고 있을 때 && 다음 애니매이션이 tag
+        /// 전환되고 있다면, 다음 애니메이션의 tag를 체크
+        if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
+        {
+            return nextInfo.normalizedTime; // 이 값을 가져와서 콤보 공격이 가능한 시점인지 판단한다
+        }
+        /// 전환되고 있지 않을 때 && 현재 애니메이션이 tag
+        else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
+        {
+            return currentInfo.normalizedTime;  // 이 값을 가져와서 공격이 가능한 시점인지 판단한다
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
 }
