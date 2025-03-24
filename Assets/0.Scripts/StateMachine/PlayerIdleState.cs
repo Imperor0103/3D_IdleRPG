@@ -30,5 +30,13 @@ public class PlayerIdleState : PlayerGroundState
     public override void Update()
     {
         base.Update();
+
+        // 입력값이 있다면
+        if (stateMachine.MovementInput != Vector2.zero)
+        {
+            // PlayerWalkState 먼저 생성 후 복귀!
+            stateMachine.ChangeState(stateMachine.WalkState);
+            return;
+        }
     }
 }

@@ -17,11 +17,30 @@ public class PlayerBaseState : IState
 
     public virtual void Enter()
     {
-
+        AddInputActionsCallbacks();
     }
 
     public virtual void Exit()
     {
+        RemoveInputActionsCallbacks();
+    }
+    protected virtual void AddInputActionsCallbacks()
+    {
+        PlayerController input = stateMachine.Player.Input;
+
+        /// 이동을 멈추었을 때 이벤트 등록
+        input.playerActions.Movement.canceled += OnMovementCanceled;
+
+        /// 달리기 시작했을 때 이벤트 등록
+        input.playerActions.Run.started += OnRunStarted;
+    }
+
+    protected virtual void RemoveInputActionsCallbacks()
+    {
+        PlayerController input = stateMachine.Player.Input;
+        /// 나갈때는 이벤트를 모두 해제
+        input.playerActions.Movement.canceled -= OnMovementCanceled;
+        input.playerActions.Run.started -= OnRunStarted;
 
     }
 
@@ -40,6 +59,19 @@ public class PlayerBaseState : IState
         // StartAnimation 함수 먼저 작성
         Move();
     }
+
+    // Movement.canceled 이벤트에 등록할 함수
+    protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
+    {
+
+    }
+    // Run.started 이벤트에 등록할 함수
+    protected virtual void OnRunStarted(InputAction.CallbackContext context)
+    {
+
+    }
+
+
 
     /// <summary>
     /// 모든 상태에는 애니메이션이 필요하다
