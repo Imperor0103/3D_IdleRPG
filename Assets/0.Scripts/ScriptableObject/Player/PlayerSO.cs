@@ -48,6 +48,14 @@ public class PlayerAttackData   // 플레이어가 공격할 때 필요한 데이터
 [Serializable]
 public class AttackInfoData
 {
+    /// 플레이어가 몬스터를 자동공격하기 위해 필요한 데이터
+    // 추적
+    [field: SerializeField] public float EnemyChasingRange { get; private set; } = 30f;
+    // 공격범위
+    [field: SerializeField] public float AttackRange { get; private set; } = 2f;
+
+
+
     [field: SerializeField] public string AttackName { get; private set; }
     [field: SerializeField] public int ComboStateIndex { get; private set; }
     [field: SerializeField][field: Range(0f, 1f)] public float ComboTransitionTime { get; private set; }    // 콤보를 이어 나갈 수 있는 임계시간

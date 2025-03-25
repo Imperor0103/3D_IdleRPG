@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
@@ -13,23 +14,35 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerSO Data { get; private set; }  // 플레이어의 SO
 
     [field: Header("Animations")]
-    [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }  
+    [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
+
+    /// <summary>
+    /// 자동사냥을 위한 NavMesh
+    /// </summary>
+    public NavMeshAgent Agent { get; private set; }
 
 
     public Animator Animator { get; private set; }
     public PlayerController Input { get; private set; }
-       
-    public CharacterController Controller { get; private set; }
 
-    private PlayerStateMachine stateMachine;
+    public CharacterController Controller { get; private set; }
 
     // y속도에 중력 적용
     public ForceReceiver ForceReceiver { get; private set; }
 
 
+    private PlayerStateMachine stateMachine;
+    [field: SerializeField] public Weapon Weapon { get; private set; }
+
+    public Health health { get; private set; }
+
+
     private void Awake()
     {
         AnimationData.Initialize();
+
+
+        Agent = GetComponent<NavMeshAgent>();
 
         Animator = GetComponentInChildren<Animator>();
         Input = GetComponent<PlayerController>();
@@ -38,6 +51,8 @@ public class Player : MonoBehaviour
 
         stateMachine = new PlayerStateMachine(this);
 
+        health = GetComponent<Health>();
+
     }
 
     private void Start()
@@ -45,6 +60,8 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         // 수정사항
         stateMachine.ChangeState(stateMachine.IdleState);   /// 가장 처음으로 들어가는 State는 Idle
+
+        health.OnDie += OnDie;
     }
 
     // 생명주기 함수
@@ -58,5 +75,11 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    void OnDie()
+    {
+        Animator.SetTrigger("Die");
+        enabled = false;
     }
 }

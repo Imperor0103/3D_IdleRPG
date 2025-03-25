@@ -21,27 +21,33 @@ MonoBehaviour:
     <JumpForce>k__BackingField: 5
   <AttakData>k__BackingField:
     <AttackInfoDatas>k__BackingField:
-    - <AttackName>k__BackingField: Attack
+    - <EnemyChasingRange>k__BackingField: 30
+      <AttackRange>k__BackingField: 2
+      <AttackName>k__BackingField: Attack
       <ComboStateIndex>k__BackingField: 1
       <ComboTransitionTime>k__BackingField: 0.8
       <ForceTransitionTime>k__BackingField: 0.1
       <Force>k__BackingField: 1
-      Damage: 5
-      <Dealing_Start_TransitionTime>k__BackingField: 0
-      <Dealing_End_TransitionTime>k__BackingField: 0
-    - <AttackName>k__BackingField: DoubleAttack
+      Damage: 20
+      <Dealing_Start_TransitionTime>k__BackingField: 0.25
+      <Dealing_End_TransitionTime>k__BackingField: 0.35
+    - <EnemyChasingRange>k__BackingField: 30
+      <AttackRange>k__BackingField: 2
+      <AttackName>k__BackingField: DoubleAttack
       <ComboStateIndex>k__BackingField: 2
       <ComboTransitionTime>k__BackingField: 0.8
       <ForceTransitionTime>k__BackingField: 0.1
       <Force>k__BackingField: 2
-      Damage: 7
+      Damage: 30
       <Dealing_Start_TransitionTime>k__BackingField: 0
       <Dealing_End_TransitionTime>k__BackingField: 0
-    - <AttackName>k__BackingField: TripleAttack
+    - <EnemyChasingRange>k__BackingField: 30
+      <AttackRange>k__BackingField: 2
+      <AttackName>k__BackingField: TripleAttack
       <ComboStateIndex>k__BackingField: -1
       <ComboTransitionTime>k__BackingField: 0.8
       <ForceTransitionTime>k__BackingField: 0.1
       <Force>k__BackingField: 3
-      Damage: 5
+      Damage: 40
       <Dealing_Start_TransitionTime>k__BackingField: 0
       <Dealing_End_TransitionTime>k__BackingField: 0
