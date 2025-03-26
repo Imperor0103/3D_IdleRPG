@@ -28,9 +28,9 @@ MonoBehaviour:
       <ComboTransitionTime>k__BackingField: 0.8
       <ForceTransitionTime>k__BackingField: 0.1
       <Force>k__BackingField: 1
-      Damage: 20
-      <Dealing_Start_TransitionTime>k__BackingField: 0.25
-      <Dealing_End_TransitionTime>k__BackingField: 0.35
+      Damage: 30
+      <Dealing_Start_TransitionTime>k__BackingField: 0.1
+      <Dealing_End_TransitionTime>k__BackingField: 0.2
     - <EnemyChasingRange>k__BackingField: 30
       <AttackRange>k__BackingField: 2
       <AttackName>k__BackingField: DoubleAttack
@@ -38,9 +38,9 @@ MonoBehaviour:
       <ComboTransitionTime>k__BackingField: 0.8
       <ForceTransitionTime>k__BackingField: 0.1
       <Force>k__BackingField: 2
-      Damage: 30
-      <Dealing_Start_TransitionTime>k__BackingField: 0
-      <Dealing_End_TransitionTime>k__BackingField: 0
+      Damage: 40
+      <Dealing_Start_TransitionTime>k__BackingField: 0.3
+      <Dealing_End_TransitionTime>k__BackingField: 0.6
     - <EnemyChasingRange>k__BackingField: 30
       <AttackRange>k__BackingField: 2
       <AttackName>k__BackingField: TripleAttack
@@ -48,6 +48,6 @@ MonoBehaviour:
       <ComboTransitionTime>k__BackingField: 0.8
       <ForceTransitionTime>k__BackingField: 0.1
       <Force>k__BackingField: 3
-      Damage: 40
-      <Dealing_Start_TransitionTime>k__BackingField: 0
-      <Dealing_End_TransitionTime>k__BackingField: 0
+      Damage: 50
+      <Dealing_Start_TransitionTime>k__BackingField: 0.3
+      <Dealing_End_TransitionTime>k__BackingField: 0.6

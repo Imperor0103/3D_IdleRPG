@@ -8,15 +8,19 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public GameObject enemyPrefab; // 생성할 Enemy 프리팹
-    public int initialEnemyCount = 3; // 초기 적 개수
-    private int currentStage = 1;
-    private List<GameObject> activeEnemies = new List<GameObject>();
-    private List<GameObject> enemyPool = new List<GameObject>();
+    public int initialEnemyCount = 2; // 초기 적 개수
+    private int currentStage = 1;   // 현재 스테이지
+    public List<GameObject> activeEnemies = new List<GameObject>();
+    public List<GameObject> enemyPool = new List<GameObject>();
     private int poolSize = 3;
+
+    public UIManager uiManager;
+
 
     void Start()
     {
         InitializePool();
+        uiManager.ShowCurrentStage();
         SpawnEnemies(initialEnemyCount);
     }
 
@@ -76,7 +80,15 @@ public class StageManager : MonoBehaviour
     void NextStage()
     {
         currentStage++;
+        uiManager.ShowCurrentStage();
+
         int newEnemyCount = initialEnemyCount + currentStage; // 스테이지마다 적 증가
         SpawnEnemies(newEnemyCount);
+    }
+
+    public int GetCurrentStageNumber()
+    {
+        return currentStage;
+
     }
 }

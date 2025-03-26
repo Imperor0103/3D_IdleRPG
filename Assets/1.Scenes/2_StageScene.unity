@@ -342,37 +342,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8709115182401369148}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &714841917
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 714841918}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &714841918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 714841917}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.1, y: 2.5369914, z: 20.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1019254918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2122166192347162107, guid: e96cdc19cd1b1644d80008c6b1476f20,
@@ -653,6 +622,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1025637982206891399, guid: 9b2eb3dd4b194b34bac8077a261ef5e7,
     type: 3}
   initialEnemyCount: 3
+  uiManager: {fileID: 1267639213276095061}
 --- !u!1001 &1639818177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1934,6 +1904,8 @@ MonoBehaviour:
   uiGameOver: {fileID: 2177738614460481945}
   gameManager: {fileID: 1368390352}
   inventory: {fileID: 5290631056324780235}
+  currentStageText: {fileID: 6321299216687670560}
+  stageManager: {fileID: 1433767532}
 --- !u!224 &1339020884033560311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4686,7 +4658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD14C\uC774\uC9C0 1"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ca9e04769e418f41ac8e755f16dc7ae, type: 2}
   m_sharedMaterial: {fileID: 3725398575374745689, guid: 9ca9e04769e418f41ac8e755f16dc7ae,
@@ -6052,7 +6024,7 @@ GameObject:
   - component: {fileID: 8513248675819948286}
   - component: {fileID: 6321299216687670560}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CurStageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6473,8 +6445,7 @@ SceneRoots:
   - {fileID: 1713855874217692810}
   - {fileID: 270460586}
   - {fileID: 1639818177}
-  - {fileID: 4499248505998179866}
-  - {fileID: 526618039}
   - {fileID: 1368390353}
   - {fileID: 1433767531}
-  - {fileID: 714841918}
+  - {fileID: 4499248505998179866}
+  - {fileID: 526618039}
