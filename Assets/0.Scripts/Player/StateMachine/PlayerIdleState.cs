@@ -19,7 +19,12 @@ public class PlayerIdleState : PlayerGroundState
     public override void Enter()
     {
         // Idle이 되기 위해서는 정지해야한다
-        stateMachine.MovementSpeedModifier = 0f;
+        /// NavMeshAgent를 사용할 떄는 Agent.Speed를 조절해야 한다
+        stateMachine.Player.Agent.speed = 0f;
+
+
+        /// 아래는 입력으로 할 때 
+        //stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
 
         /// Ground에 들어가면 기본 Idle 상태

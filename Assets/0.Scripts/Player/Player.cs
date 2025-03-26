@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
 
     public Animator Animator { get; private set; }
-    public PlayerController Input { get; private set; }
+    public PlayerController Input { get; private set; } 
 
     public CharacterController Controller { get; private set; }
 
