@@ -91,8 +91,12 @@ public class PlayerGroundState : PlayerBaseState
     // 공격시 
     protected virtual void OnAttack()
     {
-        // 타겟이 죽으면 더이상 공격하지 않는다
-        if (stateMachine.Target.IsDie) return;
+        // 타겟이 죽으면 Idle상태로 바꾸어 새로운 타겟을 찾는다
+        if (stateMachine.Target.IsDie)
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+            return;
+        }
 
         float distanace = Vector3.Distance(stateMachine.Target.transform.position, stateMachine.Player.transform.position);
         if (distanace <= stateMachine.Player.Data.AttakData.GetAttackInfo(stateMachine.ComboIndex).AttackRange)
