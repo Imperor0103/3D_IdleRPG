@@ -40,8 +40,12 @@ public class PlayerIdleState : PlayerGroundState
     public override void Update()
     {
         base.Update();
-        // 자동으로 타겟 찾기
-        FindEnemy();
+
+        // 타겟이 없을때만 타겟 찾기
+        if (stateMachine.Target == null)
+        {
+            FindEnemy();
+        }
 
         //// 입력값이 있다면
         //if (stateMachine.MovementInput != Vector2.zero)

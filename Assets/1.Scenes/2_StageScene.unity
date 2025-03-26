@@ -2224,7 +2224,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hpBar
       value: 
-      objectReference: {fileID: 7781928936869159468}
+      objectReference: {fileID: 1802156579155589093}
     - target: {fileID: 4569933629325123861, guid: e96cdc19cd1b1644d80008c6b1476f20,
         type: 3}
       propertyPath: m_LocalPosition.x

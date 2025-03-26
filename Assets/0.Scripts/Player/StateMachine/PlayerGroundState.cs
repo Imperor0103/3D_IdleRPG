@@ -91,9 +91,11 @@ public class PlayerGroundState : PlayerBaseState
     // 공격시 
     protected virtual void OnAttack()
     {
+        Debug.Log(stateMachine.Target.name);
         // 타겟이 죽으면 Idle상태로 바꾸어 새로운 타겟을 찾는다
         if (stateMachine.Target.IsDie)
         {
+            stateMachine.Target = null; // 타겟을 비운다
             stateMachine.ChangeState(stateMachine.IdleState);
             return;
         }

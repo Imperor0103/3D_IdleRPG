@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 // 아직은 쓰지 않지만, 나중에 클래스 다시 나누다보면 사용할 듯
 /// <summary>
-/// 게임매니저를 너무 늦게 만들었다
 /// 게임오버 관련 로직을 다룬다
 /// </summary>
 public class GameManager : MonoBehaviour
