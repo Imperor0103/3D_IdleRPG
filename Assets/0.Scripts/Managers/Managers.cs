@@ -12,6 +12,8 @@ public interface IManager
 public class Managers : Singleton<Managers>
 {
     // 매니저를 들고있는다
-    [field: SerializeField] private UIManager ui = new UIManager();
+    [field: SerializeField] public UIManager ui = new UIManager();
+    [field: SerializeField] public StageManager stage = new StageManager();
+    [field: SerializeField] public GameManager game = new GameManager();
 
 }

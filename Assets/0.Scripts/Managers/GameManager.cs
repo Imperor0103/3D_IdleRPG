@@ -8,11 +8,9 @@ using UnityEngine.SceneManagement;
 /// 게임매니저를 너무 늦게 만들었다
 /// 게임오버 관련 로직을 다룬다
 /// </summary>
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     public bool isGameOver;
-    public UIManager uiManager;
-
 
     public void GameOver()
     {
@@ -20,7 +18,7 @@ public class GameManager : Singleton<GameManager>
 
         // 정지 후 UI 띄운다
         Time.timeScale = 0f;
-        uiManager.uiGameOver.gameObject.SetActive(true);
+        Managers.Instance.ui.uiGameOver.gameObject.SetActive(true);
         // 커서 잠금 해제    
         Cursor.lockState = CursorLockMode.None;
     }
@@ -34,11 +32,11 @@ public class GameManager : Singleton<GameManager>
 
 
         // 인벤토리 초기화
-        uiManager.inventory.ClearInventory();  // 비우고
-        uiManager.inventory.gameObject.SetActive(true);    // 활성화
+        Managers.Instance.ui.inventory.ClearInventory();  // 비우고
+        Managers.Instance.ui.inventory.gameObject.SetActive(true);    // 활성화
         // 인벤토리 여닫는 Toggle 메서드를 Action에 연결
         //CharacterManager.Instance.Player.controller.inventoryAction += UIManager.Instance.inventory.Toggle;
-        uiManager.inventory.inventoryWindow.SetActive(false);
+        Managers.Instance.ui.inventory.inventoryWindow.SetActive(false);
 
 
         // 커서 다시 잠금

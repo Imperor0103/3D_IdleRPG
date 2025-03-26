@@ -12,15 +12,18 @@ public class StageManager : MonoBehaviour
     private int currentStage = 1;   // 현재 스테이지
     public List<GameObject> activeEnemies = new List<GameObject>();
     public List<GameObject> enemyPool = new List<GameObject>();
-    private int poolSize = 3;
+    private int poolSize;
 
-    public UIManager uiManager;
+    public Transform poolParent = null;
 
 
     void Start()
     {
         InitializePool();
-        uiManager.ShowCurrentStage();
+        Managers.Instance.ui.ShowCurrentStage();
+        poolSize = initialEnemyCount;
+        poolParent = new GameObject("PoolParent").transform;
+        poolParent.SetParent(transform);
         SpawnEnemies(initialEnemyCount);
     }
 
@@ -39,6 +42,7 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab);
+            enemy.transform.SetParent(poolParent);
             enemy.SetActive(false);
             enemyPool.Add(enemy);
         }
@@ -51,6 +55,9 @@ public class StageManager : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(-6f, 10f), 0, Random.Range(5f, 20f));
             GameObject enemy = GetEnemyFromPool();
             enemy.transform.position = spawnPosition;
+            enemy.transform.SetParent(poolParent);
+
+
             enemy.SetActive(true);
             activeEnemies.Add(enemy);
         }
@@ -80,7 +87,7 @@ public class StageManager : MonoBehaviour
     void NextStage()
     {
         currentStage++;
-        uiManager.ShowCurrentStage();
+        Managers.Instance.ui.ShowCurrentStage();
 
         int newEnemyCount = initialEnemyCount + currentStage; // 스테이지마다 적 증가
         SpawnEnemies(newEnemyCount);

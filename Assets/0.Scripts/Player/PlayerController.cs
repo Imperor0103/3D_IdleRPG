@@ -13,15 +13,13 @@ public class PlayerController : MonoBehaviour
     /// C# 스크립트로 만들었다
     /// 이동, UI띄우기 등을 한다
     /// </summary>
-    public PlayerInputs playerInput { get; private set; }  
+    public PlayerInputs playerInput { get; private set; }
     public PlayerInputs.PlayerActions playerActions { get; private set; }
 
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
 
     // Monster
     private List<GameObject> monsters;
-
-    public UIManager uiManager { get; set; }
 
     private void Awake()
     {
@@ -31,6 +29,10 @@ public class PlayerController : MonoBehaviour
 
         Agent = gameObject.GetOrAddComponent<NavMeshAgent>();
 
+    }
+
+    private void Start()
+    {
         /// tab키 입력 감지 후 UI 토글
         playerInput.Player.Inventory.performed += _ => ToggleInventoryUI();
     }
@@ -48,10 +50,11 @@ public class PlayerController : MonoBehaviour
     // 입력 받으면 UI 띄우거나 닫는다
     private void ToggleInventoryUI()
     {
-        if (uiManager.inventory != null)
+        if (Managers.Instance.ui.inventory != null)
         {
-            bool isActive = uiManager.inventory.gameObject.activeSelf;
-            uiManager.inventory.gameObject.SetActive(!isActive);
+            bool isActive = Managers.Instance.ui.inventory.gameObject.activeSelf;
+
+            Managers.Instance.ui.inventory.gameObject.SetActive(!isActive);
         }
     }
 }

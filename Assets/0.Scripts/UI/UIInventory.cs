@@ -75,24 +75,24 @@ public class UIInventory : MonoBehaviour
         unEquipButton.SetActive(false);
         dropButton.SetActive(false);
     }
-    // tab 키 누르면 인벤토리창 활성화/비활성화 
-    // PlayerController에서 설정
-    public void Toggle()
-    {
-        if (IsOpen())
-        {
-            inventoryWindow.SetActive(false);
-        }
-        else
-        {
-            inventoryWindow.SetActive(true);
-        }
-    }
-    public bool IsOpen()
-    {
-        // activeInHierarchy: 하이러키에 활성화 되어있다면 true 리턴
-        return inventoryWindow.activeInHierarchy;
-    }
+    //// tab 키 누르면 인벤토리창 활성화/비활성화 
+    //// PlayerController에서 설정
+    //public void Toggle()
+    //{
+    //    if (IsOpen())
+    //    {
+    //        inventoryWindow.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        inventoryWindow.SetActive(true);
+    //    }
+    //}
+    //public bool IsOpen()
+    //{
+    //    // activeInHierarchy: 하이러키에 활성화 되어있다면 true 리턴
+    //    return inventoryWindow.activeInHierarchy;
+    //}
 
     //public void AddItem()
     //{

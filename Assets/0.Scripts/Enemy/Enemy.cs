@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     public Health health { get; private set; }
 
-    public StageManager stageManager;
 
     private void Awake()
     {
@@ -75,8 +74,7 @@ public class Enemy : MonoBehaviour
 
         // 비활성화
         gameObject.SetActive(false);
-        stageManager.enemyPool.Add(gameObject);
-
+        Managers.Instance.stage.enemyPool.Add(gameObject);      
     }
 
 

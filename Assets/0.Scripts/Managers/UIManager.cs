@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     public UIInventory inventory;
     public TextMeshProUGUI currentStageText;
 
-    public StageManager stageManager;
     private void Start()
     {
         // 인스펙터에서 캐싱한다
@@ -29,7 +28,7 @@ public class UIManager : MonoBehaviour
         if (currentStageText != null)
         {
             //currentStageText.text = ""; // 초기화
-            currentStageText.text = $"스테이지 {stageManager.GetCurrentStageNumber()}";
+            currentStageText.text = $"스테이지 {Managers.Instance.stage.GetCurrentStageNumber()}";
         }
     }
 
